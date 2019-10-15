@@ -13,10 +13,10 @@ using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace Assignment
 {
-    public class Assignment
+    public class Assignment : Base
     {
 
-        public static IWebDriver driver;
+        //public static IWebDriver driver;
         public WebDriverWait wait;
 
         [Test]
@@ -28,13 +28,7 @@ namespace Assignment
             string text1 = string.Empty;
             string finalPath = string.Empty;
 
-            driver = new ChromeDriver(@"C:\Tools\Selenium");
-            driver.Manage().Window.Maximize();
-
-            driver.Url = "https://www.automation.com";
-           
-
-           
+            
             IWebElement Industries = driver.FindElement(By.XPath("//span[text()='Industries']"));
 
             //wait for industries to be present
@@ -84,9 +78,7 @@ namespace Assignment
             }
 
            
-            driver.Close();
-
-
+        
         }
 
 
@@ -95,13 +87,6 @@ namespace Assignment
         {
             string text1 = string.Empty;
             string firstPdtTextAfter = string.Empty;
-
-            driver = new ChromeDriver(@"C:\Tools\Selenium");
-            driver.Manage().Window.Maximize();
-
-            driver.Url = "https://www.automation.com";
-
-
 
             IWebElement products = driver.FindElement(By.XPath("//li[@class='newnav']//a[text()='Products']"));
             //wait for products to be present
@@ -210,22 +195,13 @@ namespace Assignment
             
             Assert.That(firstPdtTextBefore == firstPdtTextAfter, "verify first item is still first item displayed");
 
-            driver.Close();
-
-
+           
         }
 
 
         [Test]
         public void Asisgnment3()
         {
-
-            driver = new ChromeDriver(@"C:\Tools\Selenium");
-            driver.Manage().Window.Maximize();
-
-            driver.Url = "https://www.automation.com";
-
-
 
             IWebElement jobCenter = driver.FindElement(By.XPath("//li[@class='newnav right']//a[text()='Job Center']"));
             //wait for products to be present
@@ -247,8 +223,7 @@ namespace Assignment
             string correspondence = Functions.GetPercentCorrespondence("Mountain (West)");
             Console.WriteLine(correspondence);
 
-            driver.Close();
-
+          
         }
 
 
