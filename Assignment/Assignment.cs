@@ -244,8 +244,7 @@ namespace Assignment
             Console.WriteLine(avgSalary);
 
 
-
-
+            
             //get percent correspondence
             string correspondence = Functions.GetPercentCorrespondence("Mountain (West)");
             Console.WriteLine(correspondence);
