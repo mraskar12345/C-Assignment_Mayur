@@ -238,8 +238,7 @@ namespace Assignment
             IWebElement salarySurveyResult2018 = driver.FindElement(By.XPath("//a[text()='2018 Salary Survey Results ']"));
             salarySurveyResult2018.Click();
 
-
-            //get average salary
+             //get average salary
             string avgSalary = Functions.GetAverageSalary("South Asia");
             Console.WriteLine(avgSalary);
 
