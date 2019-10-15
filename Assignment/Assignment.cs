@@ -24,6 +24,7 @@ namespace Assignment
         {
 
             string text = string.Empty;
+
             string text1 = string.Empty;
             string finalPath = string.Empty;
 
