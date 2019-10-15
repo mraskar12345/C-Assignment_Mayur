@@ -243,8 +243,7 @@ namespace Assignment
             string avgSalary = Functions.GetAverageSalary("South Asia");
             Console.WriteLine(avgSalary);
 
-
-            
+                        
             //get percent correspondence
             string correspondence = Functions.GetPercentCorrespondence("Mountain (West)");
             Console.WriteLine(correspondence);
