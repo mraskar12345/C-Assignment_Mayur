@@ -14,10 +14,9 @@ using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace Assignment
 {
-    public class Assignment : Base
+    public class TestCase : TestBase
     {
 
-        //public static IWebDriver driver;
         public WebDriverWait wait;
 
         [Test]
@@ -30,23 +29,30 @@ namespace Assignment
             string finalPath = string.Empty;
 
             
-            IWebElement Industries = driver.FindElement(By.XPath("//span[text()='Industries']"));
+            //IWebElement Industries = driver.FindElement(By.XPath("//span[text()='Industries']"));
 
-            //wait for industries to be present
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//span[text()='Industries']")));
+            ////wait for industries to be present
+            //wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            //wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//span[text()='Industries']")));
 
-            //hover to industries
+            ////hover to industries
+            //Actions action = new Actions(driver);
+            //action.MoveToElement(Industries).Build().Perform();
+
+            ////wait for Building Automation to be present
+            //IWebElement IndustriesBuildingAutomation = driver.FindElement(By.XPath("//a[text()='Building Automation']"));
+            //wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//a[text()='Building Automation']")));
+
+            ////click building automation
+            //IndustriesBuildingAutomation.Click();
+            //test.Log(Status.Pass, "clicked on industries building automation");
+
+
             Actions action = new Actions(driver);
-            action.MoveToElement(Industries).Build().Perform();
+            action.MoveToElement(homePage.industriesLinkElement).Build().Perform();
 
-            //wait for Building Automation to be present
-            IWebElement IndustriesBuildingAutomation = driver.FindElement(By.XPath("//a[text()='Building Automation']"));
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//a[text()='Building Automation']")));
+            homePage.buildingAutomationLinkElement.Click();
 
-            //click building automation
-            IndustriesBuildingAutomation.Click();
-            test.Log(Status.Pass, "clicked on industries building automation");
 
             ////click on Building Automation e-Newsletter Archive
             //IWebElement ENewsLetterArchive = driver.FindElement(By.XPath("//div[@class='holder']//a[text()='Building Automation e-Newsletter Archive']"));
@@ -79,8 +85,8 @@ namespace Assignment
             //    Console.WriteLine(text);
             //}
 
-           
-        
+
+
         }
 
 
@@ -205,30 +211,31 @@ namespace Assignment
         public void Asisgnment3()
         {
 
-            IWebElement jobCenter = driver.FindElement(By.XPath("//li[@class='newnav right']//a[text()='Job Center']"));
-            //wait for products to be present
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//li[@class='newnav right']//a[text()='Job Center']")));
-            //hover to job center and click 2018 salary survey results
-            Actions action = new Actions(driver);
-            action.MoveToElement(jobCenter).Build().Perform();
+            //IWebElement jobCenter = driver.FindElement(By.XPath("//li[@class='newnav right']//a[text()='Job Center']"));
+            ////wait for products to be present
+            //wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            //wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//li[@class='newnav right']//a[text()='Job Center']")));
+            ////hover to job center and click 2018 salary survey results
+            //Actions action = new Actions(driver);
+            //action.MoveToElement(jobCenter).Build().Perform();
 
-            IWebElement salarySurveyResult2018 = driver.FindElement(By.XPath("//a[text()='2018 Salary Survey Results ']"));
-            salarySurveyResult2018.Click();
+            //IWebElement salarySurveyResult2018 = driver.FindElement(By.XPath("//a[text()='2018 Salary Survey Results ']"));
+            //salarySurveyResult2018.Click();
 
-             //get average salary
-            string avgSalary = Functions.GetAverageSalary("South Asia");
-            Console.WriteLine(avgSalary);
+            // //get average salary
+            //string avgSalary = Functions.GetAverageSalary("South Asia");
+            //Console.WriteLine(avgSalary);
 
                         
-            //get percent correspondence
-            string correspondence = Functions.GetPercentCorrespondence("Mountain (West)");
-            Console.WriteLine(correspondence);
+            ////get percent correspondence
+            //string correspondence = Functions.GetPercentCorrespondence("Mountain (West)");
+            //Console.WriteLine(correspondence);
 
           
         }
 
 
+       
 
     }
 }
