@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AventStack.ExtentReports;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -45,37 +46,38 @@ namespace Assignment
 
             //click building automation
             IndustriesBuildingAutomation.Click();
+            test.Log(Status.Pass, "clicked on industries building automation");
 
-            //click on Building Automation e-Newsletter Archive
-            IWebElement ENewsLetterArchive = driver.FindElement(By.XPath("//div[@class='holder']//a[text()='Building Automation e-Newsletter Archive']"));
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@class='holder']//a[text()='Building Automation e-Newsletter Archive']")));
-            ENewsLetterArchive.Click();
+            ////click on Building Automation e-Newsletter Archive
+            //IWebElement ENewsLetterArchive = driver.FindElement(By.XPath("//div[@class='holder']//a[text()='Building Automation e-Newsletter Archive']"));
+            //wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@class='holder']//a[text()='Building Automation e-Newsletter Archive']")));
+            //ENewsLetterArchive.Click();
 
-            //verify that the navigation path displays “Portal > Industries > Building Automation > Building Automation e-Newsletter Archive”
-            IReadOnlyCollection<IWebElement> NavigationPath = driver.FindElements(By.XPath("//div[@class='breadcrumbs-block']//li"));
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@class='breadcrumbs-block']//li")));
+            ////verify that the navigation path displays “Portal > Industries > Building Automation > Building Automation e-Newsletter Archive”
+            //IReadOnlyCollection<IWebElement> NavigationPath = driver.FindElements(By.XPath("//div[@class='breadcrumbs-block']//li"));
+            //wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@class='breadcrumbs-block']//li")));
 
-            foreach (var temp in NavigationPath)
-            {
-                text1 = temp.Text;
-                finalPath = finalPath + " " +  text1;
+            //foreach (var temp in NavigationPath)
+            //{
+            //    text1 = temp.Text;
+            //    finalPath = finalPath + " " +  text1;
 
-            }
+            //}
 
-            Assert.That(finalPath.Trim() == "Industries Building Automation Building Automation e-Newsletter Archive");
+            //Assert.That(finalPath.Trim() == "Industries Building Automation Building Automation e-Newsletter Archive");
 
 
-                //print count and title of all news papers
-                IReadOnlyCollection<IWebElement> ENewsLetterArchive1 = driver.FindElements(By.XPath("//div[@class='company-section add']//ul//li"));
+            //    //print count and title of all news papers
+            //    IReadOnlyCollection<IWebElement> ENewsLetterArchive1 = driver.FindElements(By.XPath("//div[@class='company-section add']//ul//li"));
 
-            int count = ENewsLetterArchive1.Count;
-            Console.WriteLine(count);
+            //int count = ENewsLetterArchive1.Count;
+            //Console.WriteLine(count);
 
-            foreach(var temp in ENewsLetterArchive1)
-            {
-                text = temp.Text;
-                Console.WriteLine(text);
-            }
+            //foreach(var temp in ENewsLetterArchive1)
+            //{
+            //    text = temp.Text;
+            //    Console.WriteLine(text);
+            //}
 
            
         
