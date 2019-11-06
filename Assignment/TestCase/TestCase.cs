@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assignment.Utilities;
 using AventStack.ExtentReports;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -11,6 +12,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
+
 
 namespace Assignment
 {
@@ -28,64 +30,23 @@ namespace Assignment
             string text1 = string.Empty;
             string finalPath = string.Empty;
 
-            
-            //IWebElement Industries = driver.FindElement(By.XPath("//span[text()='Industries']"));
-
-            ////wait for industries to be present
-            //wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            //wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//span[text()='Industries']")));
-
-            ////hover to industries
-            //Actions action = new Actions(driver);
-            //action.MoveToElement(Industries).Build().Perform();
-
-            ////wait for Building Automation to be present
-            //IWebElement IndustriesBuildingAutomation = driver.FindElement(By.XPath("//a[text()='Building Automation']"));
-            //wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//a[text()='Building Automation']")));
-
-            ////click building automation
-            //IndustriesBuildingAutomation.Click();
-            //test.Log(Status.Pass, "clicked on industries building automation");
-
 
             Actions action = new Actions(driver);
+            //step 1-hover to industries and click on building automation
             action.MoveToElement(homePage.industriesLinkElement).Build().Perform();
-
             homePage.buildingAutomationLinkElement.Click();
+            test.Log(Status.Pass, "clicked on industries building automation");
+            
+            //step 2-click on Building Automation e-Newsletter Archive
+            buildingAutomationPage.eNewsLetterArchiveElement.Click();
 
+            //verify that the navigation path displays “Portal > Industries > Building Automation > Building Automation e-Newsletter Archive”
+            bool verify = buildingAutomationPage.VerifyPath();
+            CommonFunctions.AssertLog(verify,"verified path is correct",2);
 
-            ////click on Building Automation e-Newsletter Archive
-            //IWebElement ENewsLetterArchive = driver.FindElement(By.XPath("//div[@class='holder']//a[text()='Building Automation e-Newsletter Archive']"));
-            //wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@class='holder']//a[text()='Building Automation e-Newsletter Archive']")));
-            //ENewsLetterArchive.Click();
-
-            ////verify that the navigation path displays “Portal > Industries > Building Automation > Building Automation e-Newsletter Archive”
-            //IReadOnlyCollection<IWebElement> NavigationPath = driver.FindElements(By.XPath("//div[@class='breadcrumbs-block']//li"));
-            //wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@class='breadcrumbs-block']//li")));
-
-            //foreach (var temp in NavigationPath)
-            //{
-            //    text1 = temp.Text;
-            //    finalPath = finalPath + " " +  text1;
-
-            //}
-
-            //Assert.That(finalPath.Trim() == "Industries Building Automation Building Automation e-Newsletter Archive");
-
-
-            //    //print count and title of all news papers
-            //    IReadOnlyCollection<IWebElement> ENewsLetterArchive1 = driver.FindElements(By.XPath("//div[@class='company-section add']//ul//li"));
-
-            //int count = ENewsLetterArchive1.Count;
-            //Console.WriteLine(count);
-
-            //foreach(var temp in ENewsLetterArchive1)
-            //{
-            //    text = temp.Text;
-            //    Console.WriteLine(text);
-            //}
-
-
+            // step 3-print count and title of all news papers
+            buildingAutomationPage.PrintNewsPaperTitles();
+            
 
         }
 
@@ -113,8 +74,6 @@ namespace Assignment
             Assert.That(text == "Product Search - Automation, Control & Instrumentation Products", "verify title is correct");
 
           
-
-
 
             //enter Weidmuller in bykeyword field
             IWebElement byKeyword = driver.FindElement(By.Name("text_search_1_707"));

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,8 @@ using System.Threading.Tasks;
 using Assignment.POM;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
@@ -17,7 +20,7 @@ namespace Assignment
 {
     public class TestBase
     {
-
+       
         protected PageFactory pageFactory;
         protected IWebDriver driver;
         public static ExtentReports extent;
@@ -30,13 +33,23 @@ namespace Assignment
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
+
+
+            //string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../GlobalSettings.json");
+            //StreamReader ddd = new StreamReader(filepath);
+            //var json = ddd.ReadToEnd();
+            ////JsonData objectJson = JsonConvert.DeserializeObject<JsonData>(json);
+
+            ////string timeOut = objectJson.DataCo[0].Url;
+
+
             extent = new ExtentReports();
             string projectPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\"));
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
             var htmlReporter = new ExtentHtmlReporter(projectPath + "/Reports/" + timestamp + "/");
             
             extent.AttachReporter(htmlReporter);
-            pageFactory = new PageFactory(driver);
+         
 
         }
 
@@ -45,6 +58,7 @@ namespace Assignment
         public void Setup()
         {
             driver = new ChromeDriver(@"C:\Tools\Selenium");
+            pageFactory = new PageFactory(driver);
             driver.Manage().Window.Maximize();
 
             driver.Url = "https://www.automation.com";

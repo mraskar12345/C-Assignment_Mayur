@@ -7,20 +7,21 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
+using System.Configuration;
 
 namespace Assignment
 {
     public class PageBase
     {
         protected IWebDriver driver;
-        protected IConfiguration config;
         private int waitTime;
 
         public PageBase(IWebDriver driver)
         {
             this.driver = driver;
-            waitTime = int.Parse(config["Timeout"]);
+            //waitTime = int.Parse(ConfigurationManager.AppSettings["Timeout"]);
 
+            waitTime = 30;
         }
 
         //method to wait till element is visible
