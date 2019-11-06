@@ -1,9 +1,8 @@
 {
     "Browser": "Chrome",
     "Timeout": "30",
-    "StartPage": "http://appdev.essette.com/template/v4.0/suite/",
-    "Username": "xpanxionatm",
-    "Password": "Welcome99",
-    "DisplayName": "Xpanxion ATM",
-    "GridPageLimit": "5"
+    "URL": "https://www.automation.com",
+    "Username": "",
+    "Password": ""
+
 }

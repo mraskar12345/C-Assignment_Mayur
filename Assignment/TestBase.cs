@@ -20,7 +20,7 @@ namespace Assignment
 {
     public class TestBase
     {
-       
+        protected IConfiguration config;
         protected PageFactory pageFactory;
         protected IWebDriver driver;
         public static ExtentReports extent;
@@ -35,14 +35,8 @@ namespace Assignment
         {
 
 
-            //string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../GlobalSettings.json");
-            //StreamReader ddd = new StreamReader(filepath);
-            //var json = ddd.ReadToEnd();
-            ////JsonData objectJson = JsonConvert.DeserializeObject<JsonData>(json);
-
-            ////string timeOut = objectJson.DataCo[0].Url;
-
-
+            config = new ConfigurationBuilder().AddJsonFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../GlobalSettings.json")).Build();
+            
             extent = new ExtentReports();
             string projectPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\"));
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
@@ -58,10 +52,10 @@ namespace Assignment
         public void Setup()
         {
             driver = new ChromeDriver(@"C:\Tools\Selenium");
-            pageFactory = new PageFactory(driver);
+            pageFactory = new PageFactory(driver,config);
             driver.Manage().Window.Maximize();
 
-            driver.Url = "https://www.automation.com";
+            driver.Url = config["URL"];
             //logging test name in extent report
             test = extent.CreateTest(TestContext.CurrentContext.Test.Name);
             //instantiate pages

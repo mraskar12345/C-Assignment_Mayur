@@ -14,14 +14,16 @@ namespace Assignment
     public class PageBase
     {
         protected IWebDriver driver;
+        protected IConfiguration config;
         private int waitTime;
 
-        public PageBase(IWebDriver driver)
+
+        public PageBase(IWebDriver driver, IConfiguration config)
         {
             this.driver = driver;
-            //waitTime = int.Parse(ConfigurationManager.AppSettings["Timeout"]);
+            this.config = config;
+            waitTime = int.Parse(config["Timeout"]);
 
-            waitTime = 30;
         }
 
         //method to wait till element is visible
