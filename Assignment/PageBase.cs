@@ -8,6 +8,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System.Configuration;
+using OpenQA.Selenium.Interactions;
+using AventStack.ExtentReports;
 
 namespace Assignment
 {
@@ -51,6 +53,17 @@ namespace Assignment
                 seconds = waitTime;
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator));
+        }
+
+        //function to hover to element
+        public void HoverToElement(IWebElement element, string message, int stepNumber = -1)
+        {
+            string step = (stepNumber == -1) ? "" : "Step " + stepNumber.ToString();
+            message = step + " " + message;
+            Actions action = new Actions(driver);
+            action.MoveToElement(element).Build().Perform();
+            TestBase.test.Log(Status.Pass, message);
+
         }
     }
 }

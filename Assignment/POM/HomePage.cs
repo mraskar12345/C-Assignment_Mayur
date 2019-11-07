@@ -33,6 +33,16 @@ namespace Assignment.POM
 
 
         #region "Methods"
+        //method to hover to industries
+        public void HoverToIndustries(IWebElement element)
+        {
+            HoverToElement(element,"hover to industries",1);
+
+        }
+
+
+
+
 
 
         #endregion

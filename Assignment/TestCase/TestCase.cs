@@ -25,20 +25,13 @@ namespace Assignment
         public void Assignment1()
         {
 
-            string text = string.Empty;
-
-            string text1 = string.Empty;
-            string finalPath = string.Empty;
-
-
             Actions action = new Actions(driver);
             //step 1-hover to industries and click on building automation
-            action.MoveToElement(homePage.industriesLinkElement).Build().Perform();
-            homePage.buildingAutomationLinkElement.Click();
-            test.Log(Status.Pass, "clicked on industries building automation");
-            
+            homePage.HoverToIndustries(homePage.industriesLinkElement);
+            homePage.buildingAutomationLinkElement.Click("click building automation link", 1);
+                        
             //step 2-click on Building Automation e-Newsletter Archive
-            buildingAutomationPage.eNewsLetterArchiveElement.Click();
+            buildingAutomationPage.eNewsLetterArchiveElement.Click("click enews letter archive",2);
 
             //verify that the navigation path displays “Portal > Industries > Building Automation > Building Automation e-Newsletter Archive”
             bool verify = buildingAutomationPage.VerifyPath();
