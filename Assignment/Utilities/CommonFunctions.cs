@@ -3,6 +3,7 @@ using AventStack.ExtentReports;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace Assignment.Utilities
 {
@@ -51,7 +52,18 @@ namespace Assignment.Utilities
 
         }
 
+        //functions to select form drop down
+        public static void SelectFromDropDown(this IWebElement element, string option,string message, int stepNumber = -1)
+        {
+            string step = (stepNumber == -1) ? "" : "Step " + stepNumber.ToString();
+            message = step + " " + message;
+            SelectElement select = new SelectElement(element);
+            select.SelectByText(option);
+            TestBase.test.Log(Status.Pass, message);
 
+
+
+        }
        
 
 

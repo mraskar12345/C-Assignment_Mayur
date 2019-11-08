@@ -50,112 +50,44 @@ namespace Assignment
             string text1 = string.Empty;
             string firstPdtTextAfter = string.Empty;
 
-            IWebElement products = driver.FindElement(By.XPath("//li[@class='newnav']//a[text()='Products']"));
-            //wait for products to be present
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//li[@class='newnav']//a[text()='Products']")));
-            //click products
-            products.Click();
+            //step-1 click products link
+            homePage.productsLinkElement.Click("click products link",1);
 
             //verify title is Product Search - Automation, Control & Instrumentation Products
-            IWebElement title = driver.FindElement(By.XPath("//h1[text()='Product Search - Automation, Control & Instrumentation Products']"));
-            //wait for title to be present
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//h1[text()='Product Search - Automation, Control & Instrumentation Products']")));
+            CommonFunctions.AssertLog(productsPage.GetProductsPageTitle() == "Product Search - Automation, Control & Instrumentation Products", "product page title is correct", 1);
 
-            //verificaiton of title text
-            string text = title.Text;
-            Assert.That(text == "Product Search - Automation, Control & Instrumentation Products", "verify title is correct");
-
-          
-
-            //enter Weidmuller in bykeyword field
-            IWebElement byKeyword = driver.FindElement(By.Name("text_search_1_707"));
-            byKeyword.SendKeys("Weidmuller");
-
-            //click search now
-            IWebElement searchNow = driver.FindElement(By.XPath("//a[text()='Search Now']"));
-            searchNow.Click();
-
-            //identify all header elements
-            IReadOnlyCollection<IWebElement> headers = driver.FindElements(By.XPath("//div[@class='text-holder']//a[contains(text(),'Weidmuller')]"));
-            foreach(var temp in headers)
-            {
-                text1 = temp.Text;
-                Assert.That(text1.Contains("Weidmuller"), "header contains Weidmuller");
-                Console.WriteLine(text1 + "contains Weidnuller");
-
-            }
-
-            //click open search link
-            IWebElement openSearchLink = driver.FindElement(By.XPath("//a[text()='Open Search']"));
-            //clear bykeyword field
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(By.Name("text_search_1_707")));
-            openSearchLink.Click();
-            //click search now
-            try
-            {
-                byKeyword.Clear();
-            }
-            catch (StaleElementReferenceException ex)
-            {
-                IWebElement byKeyword1 = driver.FindElement(By.Name("text_search_1_707"));
-                byKeyword1.Clear();
-            }
-            
-
-            //select category industril communication.ethernet cables
-            IWebElement categoryDropDown = driver.FindElement(By.XPath("//select[@class='select2-hidden-accessible']"));
-
-            SelectElement category = new SelectElement(categoryDropDown);
-            category.SelectByText("Industrial Communications / Ethernet Cables");
-
-
-            //click search now
-            try
-            {
-                searchNow.Click();
-            }
-            catch (StaleElementReferenceException ex)
-            {
-                IWebElement searchNow1 = driver.FindElement(By.XPath("//a[text()='Search Now']"));
-                searchNow1.Click();
-            }
-            
-
-            //product category for fist product
-            IWebElement productCategoryFirstProduct = driver.FindElement(By.XPath("(//a[text()='Ethernet Cables'])[1]"));
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("(//a[text()='Ethernet Cables'])[1]")));
-            string text2 = productCategoryFirstProduct.Text;
-            Assert.That(text2 == "Ethernet Cables" , "verify product category");
-
-            //click first item hyper link
-            IWebElement firstItem = driver.FindElement(By.XPath("//a[text()='Perle Systems announces INJ DIN Rail PoE Injectors']"));
-            string firstPdtTextBefore = firstItem.Text;
-            firstItem.Click();
-
-            //verify pdt details displayed
-            IWebElement productDetails = driver.FindElement(By.XPath("(//div[@class='info-block'])[1]"));
-            bool visible = productDetails.Displayed;
-            Assert.That(visible, "verify product details are displayed");
-
-            //navigate back to previous page
-            driver.Navigate().Back();
-
-            //fetch first item text and cmpare with previous text
-            wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//a[text()='Perle Systems announces INJ DIN Rail PoE Injectors']")));
-            try
-            {
-                firstPdtTextAfter = firstItem.Text;
-            }
-            catch (StaleElementReferenceException ex)
-            {
-                IWebElement firstItem1 = driver.FindElement(By.XPath("//a[text()='Perle Systems announces INJ DIN Rail PoE Injectors']"));
-                firstPdtTextAfter = firstItem1.Text;
-            }
-            
-            Assert.That(firstPdtTextBefore == firstPdtTextAfter, "verify first item is still first item displayed");
-
+            //step -2 enter Weidmuller in bykeyword field
+            productsPage.byKeywordTextElement.EnterText("Weidmuller", "enter text Weidmuller", 2);
+            //step 3- click search now
+            productsPage.searchNowButtonElement.Click("click search now", 3);
+            //verify all header contains weidmuller
+            CommonFunctions.AssertLog(productsPage.VerifyHeaderContainsWeidmuller(), "verify weidmuller is present in all headers",3);
+            //step 4- click open search link
+            productsPage.openSearchLinkElement.Click("click open search link", 4);
+            //step 5- clear bykeyword field
+            productsPage.byKeywordTextElement.Clear();
+            //step -6 select category industril communication.ethernet cables
+            productsPage.categoryDropDownElement.SelectFromDropDown("Industrial Communications / Ethernet Cables", "select Industrial Communications / Ethernet Cables from drop down", 6);
            
+            //step-7 click search now
+            productsPage.searchNowButtonElement.Click();
+            //step 7- verify pdt category is ethernet cables for first product
+            string text = productsPage.productCategoryFirstProductElementElement.Text;
+            CommonFunctions.AssertLog(text == "Ethernet Cables", "product category is ethernet cables", 7);
+
+            //step 8 -click first item link
+            string textBefore = productsPage.firstItemLinkElement.Text;
+            productsPage.firstItemLinkElement.Click("click first item link", 8);
+            //verify details deisplayed
+            CommonFunctions.AssertLog(productDetailsPage.productDetailsEntireSectionElement.Displayed, "product details dispalyed", 8);
+
+            //step - 9 navigate back
+            driver.Navigate().Back();
+            //fetch first item text and compare with previous text
+            string textAfter = productsPage.firstItemLinkElement.Text;
+            CommonFunctions.AssertLog(textBefore == textAfter, "both before and after texts are same for first item", 9);
+
+                                              
         }
 
 
@@ -163,27 +95,21 @@ namespace Assignment
         public void Asisgnment3()
         {
 
-            //IWebElement jobCenter = driver.FindElement(By.XPath("//li[@class='newnav right']//a[text()='Job Center']"));
-            ////wait for products to be present
-            //wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            //wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//li[@class='newnav right']//a[text()='Job Center']")));
-            ////hover to job center and click 2018 salary survey results
-            //Actions action = new Actions(driver);
-            //action.MoveToElement(jobCenter).Build().Perform();
+            //step 1-hover to job center and click 2018 salary survey results
+            homePage.HoverToJobCenter(homePage.jobCenterLinkElement);
+            homePage.salarySurveyResult2018Element.Click("click 2018 salary survey result", 1);
 
-            //IWebElement salarySurveyResult2018 = driver.FindElement(By.XPath("//a[text()='2018 Salary Survey Results ']"));
-            //salarySurveyResult2018.Click();
+            //step 2-get average salary for south asia from section "average salary by region of world"
+            string avgSalary = jobCenter_SalarySurveyResultsPage.GetAverageSalary("South Asia");
+            Console.WriteLine(avgSalary);
+            TestBase.test.Log(Status.Pass, "stpe 2 done");
 
-            // //get average salary
-            //string avgSalary = Functions.GetAverageSalary("South Asia");
-            //Console.WriteLine(avgSalary);
+            //step 3- get percent respondents for msection region of unitd states
+            string percentRespondents = jobCenter_SalarySurveyResultsPage.GetPercentRespondents("Mountain (West)");
+            Console.WriteLine(percentRespondents);
+            TestBase.test.Log(Status.Pass, "step 3 done");
 
-                        
-            ////get percent correspondence
-            //string correspondence = Functions.GetPercentCorrespondence("Mountain (West)");
-            //Console.WriteLine(correspondence);
 
-          
         }
 
 

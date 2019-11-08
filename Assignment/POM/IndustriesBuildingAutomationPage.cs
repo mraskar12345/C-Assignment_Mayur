@@ -10,10 +10,10 @@ using OpenQA.Selenium.Remote;
 namespace Assignment.POM
 {
 
-    public class BuildingAutomationPage : PageBase
+    public class IndustriesBuildingAutomationPage : PageBase
     {
 
-        public BuildingAutomationPage(IWebDriver driver, IConfiguration config) :base(driver, config)
+        public IndustriesBuildingAutomationPage(IWebDriver driver, IConfiguration config) :base(driver, config)
         {
 
         }

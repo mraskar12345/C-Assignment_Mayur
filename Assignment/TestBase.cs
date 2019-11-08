@@ -26,7 +26,10 @@ namespace Assignment
         public static ExtentReports extent;
         public static ExtentTest test;
         protected HomePage homePage;
-        protected BuildingAutomationPage buildingAutomationPage;
+        protected IndustriesBuildingAutomationPage buildingAutomationPage;
+        protected ProductsPage productsPage;
+        protected ProductDetailsPage productDetailsPage;
+        protected JobCenter_SalarySurveyResultsPage jobCenter_SalarySurveyResultsPage;
 
 
 
@@ -60,7 +63,10 @@ namespace Assignment
             test = extent.CreateTest(TestContext.CurrentContext.Test.Name);
             //instantiate pages
             homePage = pageFactory.GetPage<HomePage>();
-            buildingAutomationPage = pageFactory.GetPage<BuildingAutomationPage>();
+            buildingAutomationPage = pageFactory.GetPage<IndustriesBuildingAutomationPage>();
+            productsPage = pageFactory.GetPage<ProductsPage>();
+            productDetailsPage = pageFactory.GetPage<ProductDetailsPage>();
+            jobCenter_SalarySurveyResultsPage = pageFactory.GetPage<JobCenter_SalarySurveyResultsPage>();
 
         }
 

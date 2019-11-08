@@ -268,10 +268,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="POM\JobCenter_SalarySurveyResultsPage.cs" />
+    <Compile Include="POM\ProductDetailsPage.cs" />
+    <Compile Include="POM\ProductsPage.cs" />
     <Compile Include="Utilities\CommonFunctions.cs" />
     <Compile Include="PageBase.cs" />
     <Compile Include="PageFactory.cs" />
-    <Compile Include="POM\BuildingAutomationPage.cs" />
+    <Compile Include="POM\IndustriesBuildingAutomationPage.cs" />
     <Compile Include="POM\HomePage.cs" />
     <Compile Include="TestCase\TestCase.cs" />
     <Compile Include="TestBase.cs" />
